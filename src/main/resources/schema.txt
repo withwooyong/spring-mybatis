@@ -1,0 +1,171 @@
+-- 데이터베이스 생성
+CREATE DATABASE image_shop DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER DATABASE image_shop DEFAULT CHARACTER SET utf8;
+
+
+-- 코드그룹 테이블과 코드 테이블
+create table code_class (
+    class_code char(3) not null,
+    class_name varchar(30) not null,
+    use_yn char(1) not null default 'Y',
+    reg_date timestamp not null default now(),
+    upd_date timestamp default now(),
+    primary key (class_code)
+);
+
+create table code_detail (
+    class_code char(3) not null,
+    code_value varchar(3) not null,
+    code_name varchar(30) not null,
+    sort_seq int not null,
+    use_yn char(1) not null default 'Y',
+    reg_date timestamp not null default now(),
+    upd_date timestamp default now(),
+    primary key (class_code, code_value)
+);
+
+-- 회원 테이블과 권한테이블
+create table member (
+    user_no int(5) auto_increment,
+    user_id varchar(50) not null,
+    user_pw varchar(100) not null,
+    user_name varchar(100) not null,
+    job varchar(3) not null default '00',
+    coin int(10) default 0,
+    reg_date timestamp not null default now(),
+    upd_date timestamp default now(),
+    enabled char(1) default '1',
+    primary key (user_no)
+);
+
+create table member_auth (
+    user_no int(5) not null,
+    auth varchar(50) not null
+);
+
+alter table member_auth add constraint fk_member_auth_user_no foreign key (user_no) references member(user_no);
+
+-- 로그인 상태 유지 테이블
+create table persistent_logins (
+    username varchar(64) not null,
+    series varchar(64) not null,
+    token varchar(64) not null,
+    last_used timestamp not null,
+    primary key (series)
+);
+
+-- 회원 게시판 테이블
+create table board (
+    board_no int not null auto_increment,
+    title varchar(200) not null,
+    content text,
+    writer varchar(50) not null,
+    reg_date timestamp not null default now(),
+    primary key (board_no)
+);
+
+-- 공지사항 테이블
+create table notice (
+    notice_no int not null auto_increment,
+    title varchar(200) not null,
+    content text,
+    reg_date timestamp not null default now(),
+    primary key (notice_no)
+);
+
+-- 상품테이블
+create table item (
+    item_id int(5) auto_increment,
+    item_name varchar(20),
+    price int(6),
+    description varchar(50),
+    picture_url varchar(200),
+    primary key (item_id)
+);
+
+-- 사용자 상품 테이블
+create table user_item (
+    user_item_no int auto_increment,
+    user_no int(5) not null,
+    item_id int(5) not null,
+    reg_date timestamp default now(),
+    primary key (user_item_no)
+);
+
+-- 자료실 테이블과 파일첨부 테이블
+create table pds (
+    item_id int(5) auto_increment,
+    item_name varchar(20),
+    view_cnt int(6) default 0,
+    description varchar(50),
+    primary key (item_id)
+);
+
+create table pds_attach (
+    fullname varchar(150) not null,
+    item_id int(5) not null,
+    down_cnt int(6) default 0,
+    reg_date timestamp default now(),
+    primary key (fullname)
+);
+
+-- 충전내역 테이블
+create table pds_attach (
+    history_no int auto_increment,
+    user_no int(5) not null,
+    amount int(5) not null,
+    reg_date timestamp default now(),
+    primary key (history_no)
+);
+
+-- 지급 내역 테이블
+create table pay_coin_history (
+    history_no int auto_increment,
+    user_no int(5) not null,
+    item_id int(5) not null,
+    amount int(5) not null,
+    reg_date timestamp default now(),
+    primary key (history_no)
+);
+
+-- 접근로그 테이블
+create table access_log (
+    log_no int not null auto_increment,
+    request_uri varchar(200) not null,
+    class_name varchar(100) not null,
+    class_simple_name varchar(50) not null,
+    method_name varchar(100) not null,
+    remote_addr varchar(50) not null,
+    reg_date timestamp not null default now(),
+    primary key (log_no)
+);
+
+-- 서비스 성능로그 테이블
+create table performance_log (
+    log_no int not null auto_increment,
+    signature_name varchar(50) not null,
+    signature_type_name varchar(100) not null,
+    duration_time int default 0,
+    reg_date timestamp not null default now(),
+    primary key (log_no)
+);
+
+insert into code_class(class_code, class_name) values ('A01', 'job');
+insert into code_class(class_code, class_name) values ('A02', 'hobby');
+
+insert into code_detail(class_code, code_value, code_name, sort_seq) values ('A01', '00', '--', 1);
+insert into code_detail(class_code, code_value, code_name, sort_seq) values ('A01', '01', 'Developer', 2);
+insert into code_detail(class_code, code_value, code_name, sort_seq) values ('A01', '02', 'Designer', 3);
+insert into code_detail(class_code, code_value, code_name, sort_seq) values ('A01', '03', 'Architect', 4);
+
+insert into code_detail(class_code, code_value, code_name, sort_seq) values ('A02', '00', '--', 1);
+insert into code_detail(class_code, code_value, code_name, sort_seq) values ('A02', '02', 'Movie', 2);
+insert into code_detail(class_code, code_value, code_name, sort_seq) values ('A02', '03', 'Music', 3);
+insert into code_detail(class_code, code_value, code_name, sort_seq) values ('A02', '04', 'Sports', 4);
+
+
+
+
+
+
+
