@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,5 +17,5 @@ public class PerformanceLog implements Serializable {
 	private String signatureName;
 	private String signatureTypeName;
 	private long durationTime;
-	private Date regDate;
+	private LocalDateTime regDate;
 }

@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,6 +17,6 @@ public class CodeClass implements Serializable {
   private String classCode;
   private String className;
   private String useYn;
-  private Date regDate;
-  private Date updDate;
+  private LocalDateTime regDate;
+  private LocalDateTime updDate;
 }

@@ -6,7 +6,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -32,8 +32,8 @@ public class Member implements Serializable {
 
   private boolean enabled;
 
-  private Date regDate;
-  private Date updDate;
+  private LocalDateTime regDate;
+  private LocalDateTime updDate;
 
   private List<MemberAuth> authList;
 }

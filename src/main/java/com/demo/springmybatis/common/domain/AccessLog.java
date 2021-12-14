@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,5 +19,5 @@ public class AccessLog implements Serializable {
 	private String classSimpleName;
 	private String methodName;
 	private String remoteAddr;
-	private Date regDate;
+	private LocalDateTime regDate;
 }

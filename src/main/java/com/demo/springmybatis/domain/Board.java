@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,5 +18,5 @@ public class Board implements Serializable {
   private String title;
   private String content;
   private String writer;
-  private Date regDate;
+  private LocalDateTime regDate;
 }

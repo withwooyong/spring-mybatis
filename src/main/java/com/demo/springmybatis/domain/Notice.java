@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,5 +17,5 @@ public class Notice implements Serializable {
   private int noticeNo;
   private String title;
   private String content;
-  private Date regDate;
+  private LocalDateTime regDate;
 }

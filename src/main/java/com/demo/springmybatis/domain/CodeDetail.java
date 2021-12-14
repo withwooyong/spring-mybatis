@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,6 +19,6 @@ public class CodeDetail implements Serializable {
   private String codeName;
   private int sortSeq;
   private String useYn;
-  private Date regDate;
-  private Date updDate;
+  private LocalDateTime regDate;
+  private LocalDateTime updDate;
 }

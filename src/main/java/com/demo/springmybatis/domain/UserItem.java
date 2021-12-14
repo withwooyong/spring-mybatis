@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -23,5 +23,5 @@ public class UserItem implements Serializable {
   private String description;
   private String pictureUrl;
 
-  private Date regDate;
+  private LocalDateTime regDate;
 }
